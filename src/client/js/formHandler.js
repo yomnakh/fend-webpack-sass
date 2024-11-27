@@ -14,3 +14,21 @@ function handleSubmit(event) {
 }
 
 export { handleSubmit }
+
+
+function handleAPICall(event) {
+    event.preventDefault();
+    const userInput = document.getElementById('name').value;
+
+    fetch(`https://jsonplaceholder.typicode.com/posts/${userInput}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('results').innerHTML = `
+                <p>Title: ${data.title}</p>
+                <p>Body: ${data.body}</p>
+            `;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+export { handleAPICall };
